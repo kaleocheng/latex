@@ -566,11 +566,12 @@ func (lst *HList) Height() float64 { return lst.lst.Height() }
 // Depth returns the depth of this node.
 func (lst *HList) Depth() float64 { return lst.lst.Depth() }
 
-func (lst *HList) Nodes() []Node    { return lst.lst.Nodes() }
-func (lst *HList) GlueOrder() int   { return lst.lst.GlueOrder() }
-func (lst *HList) GlueSign() int    { return lst.lst.GlueSign() }
-func (lst *HList) GlueSet() float64 { return lst.lst.GlueSet() }
-func (lst *HList) Shift() float64   { return lst.lst.shift }
+func (lst *HList) Nodes() []Node      { return lst.lst.Nodes() }
+func (lst *HList) GlueOrder() int     { return lst.lst.GlueOrder() }
+func (lst *HList) GlueSign() int      { return lst.lst.GlueSign() }
+func (lst *HList) GlueSet() float64   { return lst.lst.GlueSet() }
+func (lst *HList) Shift() float64     { return lst.lst.shift }
+func (lst *HList) SetShift(s float64) { lst.lst.shift = s }
 
 func (lst *HList) hpackDims(width, height, depth *float64, stretch, shrink []float64) {
 	lst.lst.hpackDims(width, height, depth, stretch, shrink)

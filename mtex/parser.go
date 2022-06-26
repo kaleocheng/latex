@@ -109,6 +109,32 @@ func (v *visitor) Visit(n ast.Node) ast.Visitor {
 		v.state.Font.Type = oldt
 		return nil
 
+	case *ast.Sup:
+		olds := v.state.Font.Size
+		v.state.Font.Size = v.state.Font.Size / 2
+		sup := v.p.handleNode(n.Node, v.state, true)
+		hl := tex.HListOf([]tex.Node{
+			sup,
+		}, true)
+		hl.SetShift(-hl.Height() * tex.DefaultFontConstants.Sup1)
+		v.state.Font.Size = olds
+
+		v.nodes = append(v.nodes, hl)
+		return nil
+
+	case *ast.Sub:
+		olds := v.state.Font.Size
+		v.state.Font.Size = v.state.Font.Size / 2
+		sub := v.p.handleNode(n.Node, v.state, true)
+		hl := tex.HListOf([]tex.Node{
+			sub,
+		}, true)
+		hl.SetShift(hl.Height() * tex.DefaultFontConstants.Sub1)
+		v.state.Font.Size = olds
+
+		v.nodes = append(v.nodes, hl)
+		return nil
+
 	case *ast.Macro:
 		if n.Name == nil {
 			panic("macro with nil identifier")
